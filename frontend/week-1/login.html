@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-in</title>
+    <link rel="icon" href="login.png" type="image/x-icon" />
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="navbar-container">
+                <div class="logo">
+                    <img src="login.png" alt="Logo">
+                    <span class="company-name">POS System</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="form-container">
+            <div class="image-section">
+                <img src="girl.png" alt="Login Image">
+            </div>
+            <div class="form-section">
+                <h2>Member Login</h2>
+                <form>
+                    <div class="input-container">
+                        <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="input-container">
+                        <label for="password"><i class="fa fa-lock"></i> Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button type="submit">Login</button>
+                    <a href="#" class="forgot-password">Forgot Username / Password?</a>
+                </form>
+                <a href="#" class="create-account">Create your Account →</a>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 POS System. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
