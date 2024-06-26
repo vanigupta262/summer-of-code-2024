@@ -33,6 +33,14 @@
                 <h2>Member Login</h2>
                 <form>
                     <div class="input-container">
+                        <label for="signin-role"><i class="fa fa-user"></i> Role</label>
+                        <select id="signin-role" name="role" required>
+                            <option value="" disabled selected>Select Role</option>
+                            <option value="admin">Admin</option>
+                            <option value="cashier">Cashier</option>
+                        </select>
+                    </div>
+                    <div class="input-container">
                         <label for="email"><i class="fa fa-envelope"></i> Email</label>
                         <input type="email" id="email" name="email" required>
                     </div>
