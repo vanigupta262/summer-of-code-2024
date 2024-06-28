@@ -1,5 +1,4 @@
 import psycopg2
-from psycopg2 import sql
 
 # Define your database connection parameters
 DB_NAME = "POS"
@@ -7,26 +6,6 @@ DB_USER = "postgres"
 DB_PASSWORD = "tiger"
 DB_HOST = "localhost"
 DB_PORT = "5432"
-
-def validate_email(email):
-    email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
-    if re.match(email_regex, email):
-        return True
-    else:
-        return False
-
-def validate_price(price):
-    if price >= 0:
-        return True
-    else:
-        return False
-
-def validate_contact(contact):
-    contact_regex = r'^\d{10}$'  # Assuming a 10-digit contact number
-    if re.match(contact_regex, contact):
-        return True
-    else:
-        return False
 
 def connect_to_db():
     try:
@@ -39,12 +18,12 @@ def connect_to_db():
             port=DB_PORT
         )
         print("Connection to PostgreSQL DB successful")
-        
         return connection
     except Exception as error:
         print(f"Error: Could not connect to the PostgreSQL DB")
         print(error)
         return None
+
 def create_tables(connection):
     try:
         cursor = connection.cursor()
@@ -52,13 +31,13 @@ def create_tables(connection):
         # Create InventoryItem table
         create_inventory_item_table = '''
         CREATE TABLE IF NOT EXISTS InventoryItem (
-            Item_SKU SERIAL PRIMARY KEY,
+            item_sku SERIAL PRIMARY KEY,
             Item_Name VARCHAR(100) NOT NULL,
             Item_Description TEXT,
             Item_Price DECIMAL(10, 2) NOT NULL,
             Item_Qty INT NOT NULL,
             parent_sku INT,
-            FOREIGN KEY (parent_sku) REFERENCES InventoryItem(Item_SKU)
+            FOREIGN KEY (parent_sku) REFERENCES InventoryItem(item_sku)
         );
         '''
 
@@ -89,13 +68,13 @@ def create_tables(connection):
             t_ID SERIAL PRIMARY KEY,
             c_ID INT NOT NULL,
             s_ID INT NOT NULL,
+            item_sku INT NOT NULL,
             t_date TIMESTAMP NOT NULL,
             t_amount DECIMAL(10, 2) NOT NULL,
             t_category VARCHAR(100),
             FOREIGN KEY (c_ID) REFERENCES Customer(c_ID),
             FOREIGN KEY (s_ID) REFERENCES Staff(s_ID),
-            FOREIGN KEY (t_ID) REFERENCES InventoryItem(ITEM_SKU)
-
+            FOREIGN KEY (item_sku) REFERENCES InventoryItem(item_sku)
         );
         '''
 
@@ -108,7 +87,7 @@ def create_tables(connection):
 
         # Create indexes
         create_index_queries = [
-            'CREATE INDEX IF NOT EXISTS idx_inventory_item_sku ON InventoryItem (Item_SKU);',
+            'CREATE INDEX IF NOT EXISTS idx_inventory_item_sku ON InventoryItem (item_sku);',
             'CREATE INDEX IF NOT EXISTS idx_customer_email ON Customer (c_email);'
         ]
 
@@ -123,7 +102,6 @@ def create_tables(connection):
         print(error)
     finally:
         cursor.close()
-    
 
 def main():
     connection = connect_to_db()
