@@ -1,0 +1,139 @@
+# swagger.yml
+
+openapi: 3.0.0
+info:
+  title: "RP Flask REST API"
+  description: "An API about people and notes"
+  version: "1.0.0"
+
+servers:
+  - url: "/"
+
+paths:
+  /products:
+    get:
+      operationId: "app.routes.read_all"
+      tags:
+        - "Products"
+      summary: "Retrieve list of products"
+      responses:
+        "200":
+          description: "Successfully read Product list"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+
+    post:
+      operationId: "app.routes.create_new_product"
+      tags:
+        - "Products"
+      summary: "Creates new product"
+      requestBody:
+        description: "Product to create"
+        required: true
+        content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+      responses:
+        "201":
+          description: "Product successfully created"
+
+  /products/{id}:
+    get:
+      operationId: "app.routes.get_product_by_id"
+      tags:
+        - "Products"
+      summary: "Retrieves product by id"
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            #NOT int
+      responses:
+        "200":
+          description: "A single Product"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "404":
+          description: "Product Not found"
+    
+    put:
+      operationId: "app.routes.update_by_id"
+      tags:
+        - "Products"
+      summary: "Updates by id"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: 
+            type: integer
+      requestBody:
+        description: "Product to update"
+        required: true
+        content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+      responses:
+        "200":
+          description: "Product updated"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "404":
+          description: "Product Not found"
+    
+    delete:
+      operationId: "app.routes.delete_by_id"
+      tags:
+        - "Products"
+      summary: "Delete"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: 
+            type: integer
+      responses:
+        "200":
+          description: "Product updated"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "404":
+          description: "Product Not found"
+
+
+      
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        Item_SKU:
+          type: integer
+        Item_Name:
+          type: string
+        Item_Description:
+          type: string
+        Item_Price:
+          type: number
+          format: float
+        Item_Qty:
+          type: integer
+        parent_sku:
+          type: integer
+          #null
+          nullable: true
