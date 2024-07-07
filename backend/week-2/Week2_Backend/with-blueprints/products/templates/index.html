@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Datatables Example</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css"/>
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+<h1>All Products</h1>
+<table id="example" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>Item_SKU</th>
+            <th>Item_Name</th>
+            <th>Item_Description</th>
+            <th>Item_Price</th>
+            <th>Item_Qty</th>
+            <th>parent_sku</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.Item_SKU }}</td>
+            <td>{{ product.Item_Name }}</td>
+            <td>{{ product.Item_Description }}</td>
+            <td>{{ product.Item_Price }}</td>
+            <td>{{ product.Item_Qty }}</td>
+            <td>{{ product.parent_sku }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <!-- <tfoot>
+        <tr>
+            <th>Item_SKU</th>
+            <th>Item_Name</th>
+            <th>Item_Description</th>
+            <th>Item_Price</th>
+            <th>Item_Qty</th>
+            <th>parent_sku</th>
+        </tr>
+    </tfoot> -->
+</table>
+<script>
+$(document).ready(function() {
+    $('#example').DataTable();
+});
+</script>
+</body>
+</html>

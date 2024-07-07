@@ -1,0 +1,39 @@
+/* Add your custom CSS for the navbar and other elements here */
+body {
+    background-image: url('../images/bg.png');
+    background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+.navbar {
+    background-color: #f8f9fa;
+    transition: background-color 0.3s;
+  }
+  
+  .navbar:hover {
+    background-color: #e9ecef;
+  }
+  
+  .navbar-brand {
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+  
+  .nav-link {
+    font-size: 1.2em;
+    transition: color 0.3s;
+  }
+  
+  .nav-link:hover {
+    color: #0056b3;
+  }
+  
+  .card {
+    transition: transform 0.3s;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
